@@ -1,4 +1,4 @@
-namespace Project.ECommerce.API;
+namespace Project.ECommerce.API.Shopping;
 
 public class WeatherForecast
 {
