@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace Project.ECommerce.API.Authentication.src.Models.Utils;
+namespace Project.ECommerce.API.Orders.src.Models.Utils;
 public class ApiResponse<T>
 {
     public T Data { get; set; }
