@@ -1,5 +1,4 @@
 using Project.ECommerce.API.Users.src.Models.Users;
-using Project.ECommerce.API.Users.src.Models.Users.Dtos;
 
 namespace Project.ECommerce.API.Users.src.Repositories.Interfaces;
 public interface IUserRepository
