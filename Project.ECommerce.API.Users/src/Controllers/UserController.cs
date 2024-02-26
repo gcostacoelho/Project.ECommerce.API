@@ -43,7 +43,7 @@ public class UserController(IUserServices userServices) : ControllerBase
     [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> CreateUserAsync([FromBody, Required] User user)
+    public async Task<IActionResult> CreateUserAsync([FromBody, Required] UserPostDto user)
     {
         var response = await _userServices.CreateUser(user);
 

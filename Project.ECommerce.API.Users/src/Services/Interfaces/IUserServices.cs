@@ -7,7 +7,7 @@ public interface IUserServices
 {
     ApiResponse<List<User>> GetAllUsers();
     Task<ApiResponse<User>> GetUser(string userId);
-    Task<ApiResponse<User>> CreateUser(User user);
+    Task<ApiResponse<User>> CreateUser(UserPostDto user);
     Task<ApiResponse<User>> UpdateUser(string userId, UserDto userDto);
     Task DeleteUser(string userId);
 }

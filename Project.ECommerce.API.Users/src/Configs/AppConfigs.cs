@@ -10,6 +10,8 @@ using Project.ECommerce.API.Users.src.Repositories.LoginRepository;
 using Project.ECommerce.API.Users.src.Repositories.AddressRepository;
 using Project.ECommerce.API.Users.src.Services.Interfaces;
 using Project.ECommerce.API.Users.src.Services.LoginServices;
+using Project.ECommerce.API.Users.src.Services.AddressServices;
+using Project.ECommerce.API.Users.src.Services.UserServices;
 
 namespace Project.ECommerce.API.Users.src.Configs;
 public static class AppConfigs
@@ -31,7 +33,9 @@ public static class AppConfigs
             .AddScoped<ILoginRepository, LoginRepository>();
 
         // Services
-        services.AddScoped<ILoginServices, LoginService>();
+        services.AddScoped<ILoginServices, LoginService>()
+            .AddScoped<IAddressServices, AddressService>()
+            .AddScoped<IUserServices, UserService>();
 
         // Singletons
         services.AddSingleton<IAppSettings, AppSettings>();
