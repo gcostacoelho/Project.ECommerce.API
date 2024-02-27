@@ -13,12 +13,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Address> Adresses { get; set; }
     public DbSet<LoginInfos> Logins { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<User>().OwnsMany(e => e.Address);
-        modelBuilder.Entity<User>().OwnsOne(e => e.LoginInfos);
-    }
-
     public override int SaveChanges()
     {
         AddTimestamps();

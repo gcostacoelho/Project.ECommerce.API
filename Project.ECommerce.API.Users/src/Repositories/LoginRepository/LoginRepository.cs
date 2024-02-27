@@ -9,7 +9,7 @@ public class LoginRepository(AppDbContext appDbContext) : ILoginRepository
 
     public async Task<bool> UpdatePassword(LoginInfos loginInfos)
     {
-        _appDbContext.Entry(loginInfos).Property(x => x.Password).IsModified =true;
+        _appDbContext.Entry(loginInfos).Property(x => x.Password).IsModified = true;
 
         await _appDbContext.SaveChangesAsync();
 

@@ -38,12 +38,18 @@ public class UserRepository(AppDbContext appDbContext) : IUserRepository
 
     public IList<User> GetAllUsers()
     {
-        return _appDbContext.Users.ToList();
+        return _appDbContext.Users
+            .Include(u => u.Address)
+            .Include(u => u.LoginInfos)
+            .ToList();
     }
 
     public async Task<User> GetUser(string userId)
     {
-        return await _appDbContext.Users.FindAsync(userId);
+        return await _appDbContext.Users
+            .Include(u => u.Address)
+            .Include(u => u.LoginInfos)
+            .FirstOrDefaultAsync(u => u.Id == userId);
     }
 
     public async Task<bool> UpdateUser(User userEntity)

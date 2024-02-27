@@ -96,7 +96,6 @@ public class UserService(IUserRepository userRepository) : IUserServices
     {
         return new LoginInfos
         {
-            Username = loginInfosDto.Username,
             Password = loginInfosDto.Password
         };
     }
