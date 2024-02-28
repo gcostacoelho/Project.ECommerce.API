@@ -75,17 +75,14 @@ public class UserService(IUserRepository userRepository) : IUserServices
             throw new ApiException(Constants.USER_NOT_FOUND_MESSAGE, HttpStatusCode.BadRequest);
         }
 
-        var userEntity = new User
-        {
-            Fullname = userDto.Fullname,
-            Document = userDto.Document,
-            Cellphone = userDto.Cellphone,
-            Email = userDto.Email,
-            LoginInfos = user.LoginInfos,
-            Address = user.Address
-        };
+        // ! Search a better way to do this without generate error in sql server;
 
-        await _userRepository.UpdateUser(userEntity);
+        user.Fullname = userDto.Fullname;
+        user.Document = userDto.Document;
+        user.Cellphone = userDto.Cellphone;
+        user.Email = userDto.Email;
+
+        await _userRepository.UpdateUser(user);
 
         var userUpdated = await _userRepository.GetUser(userId);
 
