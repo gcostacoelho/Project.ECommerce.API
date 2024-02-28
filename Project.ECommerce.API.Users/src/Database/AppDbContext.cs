@@ -13,6 +13,15 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Address> Adresses { get; set; }
     public DbSet<LoginInfos> Logins { get; set; }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<User>()
+            .HasOne(e => e.LoginInfos)
+            .WithOne(e => e.User)
+            .HasForeignKey<LoginInfos>(e => e.UserId)
+            .IsRequired();
+    }
+
     public override int SaveChanges()
     {
         AddTimestamps();

@@ -20,7 +20,7 @@ public class AddressService(IAddressRepository addressRepository, IUserRepositor
             throw new ApiException(Constants.USER_NOT_FOUND_MESSAGE, HttpStatusCode.BadRequest);
         }
 
-        var userAddressSelected = user.Address.ToList().Find(x => x.Id == addressId);
+        var userAddressSelected = user.Address.ToList().Find(x => x.Id == Guid.Parse(addressId));
 
         await _addressRepository.DeleteAddress(userAddressSelected);
     }

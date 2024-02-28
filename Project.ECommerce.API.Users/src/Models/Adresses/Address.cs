@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using Project.ECommerce.API.Users.src.Models.Users;
 using Project.ECommerce.API.Users.src.Models.Utils;
 
@@ -17,6 +17,9 @@ public class Address : BaseModel
 
     public string Complement { get; set; }
 
-    public string UserId { get; set; }
+    public Guid UserId { get; set; }
+
+    [JsonIgnore]
+    public User User {get; set;}
 
 }

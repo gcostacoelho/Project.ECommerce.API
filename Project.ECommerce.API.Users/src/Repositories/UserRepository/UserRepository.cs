@@ -49,7 +49,7 @@ public class UserRepository(AppDbContext appDbContext) : IUserRepository
         return await _appDbContext.Users
             .Include(u => u.Address)
             .Include(u => u.LoginInfos)
-            .FirstOrDefaultAsync(u => u.Id == userId);
+            .FirstOrDefaultAsync(u => u.Id == Guid.Parse(userId));
     }
 
     public async Task<bool> UpdateUser(User userEntity)
