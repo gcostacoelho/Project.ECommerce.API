@@ -17,7 +17,7 @@ public class LoginInfosController(ILoginServices loginServices) : ControllerBase
     [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 
-    public async Task<IActionResult> UpdatePasswordAsync([FromHeader, Required] string userId, [FromHeader, Required] string newPass)
+    public async Task<IActionResult> UpdatePasswordAsync([FromHeader, Required] string userId, string newPass)
     {
         var response = await _loginServices.UpdatePasswordAsync(userId, newPass);
 

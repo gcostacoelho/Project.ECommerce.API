@@ -23,4 +23,18 @@ public class AddressRepository(AppDbContext appDbContext) : IAddressRepository
 
         await _appDbContext.SaveChangesAsync();
     }
+
+    public async Task AddNewAddress(Address address)
+    {
+        try
+        {
+            _appDbContext.Add(address);
+
+            await _appDbContext.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+    }
 }

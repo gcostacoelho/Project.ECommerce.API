@@ -75,8 +75,6 @@ public class UserService(IUserRepository userRepository) : IUserServices
             throw new ApiException(Constants.USER_NOT_FOUND_MESSAGE, HttpStatusCode.BadRequest);
         }
 
-        // ! Search a better way to do this without generate error in sql server;
-
         user.Fullname = userDto.Fullname;
         user.Document = userDto.Document;
         user.Cellphone = userDto.Cellphone;
