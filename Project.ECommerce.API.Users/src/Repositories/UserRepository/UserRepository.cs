@@ -19,6 +19,7 @@ public class UserRepository(AppDbContext appDbContext) : IUserRepository
         catch (Exception e)
         {
             Console.WriteLine(e);
+            throw;
         }
     }
 
@@ -33,6 +34,7 @@ public class UserRepository(AppDbContext appDbContext) : IUserRepository
         catch (Exception e)
         {
             Console.WriteLine(e);
+            throw;
         }
     }
 
