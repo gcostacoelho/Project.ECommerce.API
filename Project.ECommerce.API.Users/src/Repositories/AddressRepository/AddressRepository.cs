@@ -35,6 +35,7 @@ public class AddressRepository(AppDbContext appDbContext) : IAddressRepository
         catch (Exception e)
         {
             Console.WriteLine(e);
+            throw;
         }
     }
 }
