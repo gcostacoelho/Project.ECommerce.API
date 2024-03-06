@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Microsoft.OpenApi.Models;
 using Project.ECommerce.API.Users.src.Configs;
 using Project.ECommerce.API.Users.src.Middlewares;
