@@ -5,4 +5,5 @@ public class Constants
     public const string USER_NOT_FOUND_MESSAGE = "User not found";
     public const string NOT_POSSIBLE_CHANGE = "It is not possible to make the change password";
     public const string UNAUTHORIZED = "Unauthorized";
+    public const string ADDRESS_NOT_FOUND_MESSAGE = "Address not found";
 }

@@ -23,6 +23,11 @@ public class AddressService(IAddressRepository addressRepository, IUserRepositor
 
         var userAddressSelected = user.Address.ToList().Find(x => x.Id == Guid.Parse(addressId));
 
+        if (userAddressSelected is null)
+        {
+            throw new ApiException(Constants.ADDRESS_NOT_FOUND_MESSAGE, HttpStatusCode.BadRequest);
+        }
+
         await _addressRepository.DeleteAddress(userAddressSelected);
     }
 
@@ -35,7 +40,7 @@ public class AddressService(IAddressRepository addressRepository, IUserRepositor
             throw new ApiException(Constants.USER_NOT_FOUND_MESSAGE, HttpStatusCode.BadRequest);
         }
 
-        var userAddressSelected = user.Address.ToList().Find(x => x.Id == Guid.Parse(addressId)) ?? throw new ApiException("Address not found", HttpStatusCode.BadRequest);
+        var userAddressSelected = user.Address.ToList().Find(x => x.Id == Guid.Parse(addressId)) ?? throw new ApiException(Constants.ADDRESS_NOT_FOUND_MESSAGE, HttpStatusCode.BadRequest);
 
         userAddressSelected.Street = address.Street;
         userAddressSelected.Number = address.Number;
@@ -46,7 +51,7 @@ public class AddressService(IAddressRepository addressRepository, IUserRepositor
 
         await _addressRepository.UpdateAddress(userAddressSelected);
 
-        return ApiResponse<string>.Success("address updated with successfully");
+        return ApiResponse<string>.Success("Address updated with successfully");
     }
 
     public async Task<ApiResponse<string>> NewAddressAsync(string userId, AddressDto address)
