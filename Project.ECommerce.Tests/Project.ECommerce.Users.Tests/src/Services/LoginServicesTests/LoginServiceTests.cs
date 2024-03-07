@@ -62,7 +62,8 @@ public class LoginServiceTests
 
     private static User MockedUser()
     {
-        var loginInfo = new LoginInfos { Password = "test1234" };
+        var loginInfo = new LoginInfos { Email = "Email", Password = "test1234" };
+
         var address = new List<Address>
         {
             new Address
@@ -80,7 +81,6 @@ public class LoginServiceTests
         {
             Id = Guid.NewGuid(),
             Fullname = "Fullname",
-            Email = "Email",
             Cellphone = "Cellphone",
             Document = "Document",
             LoginInfos = loginInfo,

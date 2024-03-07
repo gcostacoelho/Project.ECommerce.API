@@ -16,7 +16,7 @@ public class LoginRepositoryTests
     {
         // Arrange
         var dbContext = await GetAppDbContextAsync();
-        
+
         var user = dbContext.Users.ToList()[0];
 
         var loginInfo = user.LoginInfos;
@@ -57,7 +57,7 @@ public class LoginRepositoryTests
 
     private static User MockedUser()
     {
-        var loginInfo = new LoginInfos { Password = "test1234" };
+        var loginInfo = new LoginInfos { Email = "Email", Password = "test1234" };
         var address = new List<Address>
         {
             new Address
@@ -75,7 +75,6 @@ public class LoginRepositoryTests
         {
             Id = Guid.NewGuid(),
             Fullname = "Fullname",
-            Email = "Email",
             Cellphone = "Cellphone",
             Document = "Document",
             LoginInfos = loginInfo,
