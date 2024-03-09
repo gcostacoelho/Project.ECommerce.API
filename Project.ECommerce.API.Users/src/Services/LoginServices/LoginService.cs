@@ -6,10 +6,9 @@ using Project.ECommerce.API.Users.src.Repositories.Interfaces;
 using Project.ECommerce.API.Users.src.Services.Interfaces;
 
 namespace Project.ECommerce.API.Users.src.Services.LoginServices;
-public class LoginService(ILoginRepository loginRepository, IUserRepository userRepository) : ILoginServices
+public class LoginService(ILoginRepository loginRepository) : ILoginServices
 {
     private readonly ILoginRepository _loginRepository = loginRepository;
-    private readonly IUserRepository _userRepository = userRepository;
 
     public async Task<ApiResponse<string>> UpdatePasswordAsync(string email, string newPass)
     {

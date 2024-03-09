@@ -12,14 +12,12 @@ namespace Project.ECommerce.Tests.Project.ECommerce.Users.Tests.src.Services.Log
 public class LoginServiceTests
 {
     private readonly Mock<ILoginRepository> _loginRepository = new Mock<ILoginRepository>();
-    private readonly Mock<IUserRepository> _userRepository = new Mock<IUserRepository>();
 
     private readonly LoginService _loginService;
 
-
     public LoginServiceTests()
     {
-        _loginService = new LoginService(_loginRepository.Object, _userRepository.Object);
+        _loginService = new LoginService(_loginRepository.Object);
     }
 
     [Fact]
@@ -27,18 +25,19 @@ public class LoginServiceTests
     {
         // Arrange
         var user = MockedUser();
+        var userEmail = user.LoginInfos.Email;
 
-        _userRepository.Setup(x => x.GetUser(user.Id.ToString())).ReturnsAsync(user);
+        _loginRepository.Setup(x => x.GetLoginInfos(userEmail)).ReturnsAsync(user.LoginInfos);
         _loginRepository.Setup(x => x.UpdatePassword(user.LoginInfos)).ReturnsAsync(true);
 
         // Act
 
-        var result = await _loginService.UpdatePasswordAsync(user.Id.ToString(), "test1234");
+        var result = await _loginService.UpdatePasswordAsync(userEmail, "test1234");
 
         // Assert
 
         result.Should().BeOfType<ApiResponse<string>>();
-        result.Data.Should().Be("Senha alterada com sucesso");
+        result.Data.Should().Be("Password changed with successfully");
     }
 
     [Fact]
@@ -58,6 +57,80 @@ public class LoginServiceTests
             .ThrowAsync<ApiException>()
             .WithMessage(Constants.USER_NOT_FOUND_MESSAGE);
     }
+
+    [Fact]
+    public async void LoginService_UpdateEmailAsync_ReturnApiResponseString()
+    {
+        // Arrange
+        var user = MockedUser();
+        var userEmail = user.LoginInfos.Email;
+
+        _loginRepository.Setup(x => x.GetLoginInfos(userEmail)).ReturnsAsync(user.LoginInfos);
+        _loginRepository.Setup(x => x.UpdateEmail(user.LoginInfos)).ReturnsAsync(true);
+
+        // Act
+
+        var result = await _loginService.UpdateEmailAsync(userEmail, "email1234");
+
+        // Assert
+
+        result.Should().BeOfType<ApiResponse<string>>();
+        result.Data.Should().Be("Email changed with successfully");
+    }
+
+    [Fact]
+    public async void LoginService_UpdateEmailAsync_ReturnApiException()
+    {
+        // Arrange
+
+        // Act
+
+        Func<Task> result = async () => await _loginService.UpdateEmailAsync("email", "email1235");
+
+        // Assert
+
+        await result.Should()
+            .ThrowAsync<ApiException>()
+            .WithMessage(Constants.USER_NOT_FOUND_MESSAGE);
+    }
+
+
+    [Fact]
+    public async void LoginService_GetLoginInfosAsync_ReturnApiResponseLoginInfos()
+    {
+        // Arrange
+
+        var mockUser = MockedUser();
+
+        var userEmail = mockUser.LoginInfos.Email;
+
+        _loginRepository.Setup(x => x.GetLoginInfos(userEmail)).ReturnsAsync(mockUser.LoginInfos);
+
+        // Act
+
+        var result = await _loginService.GetLoginsInfosAsync(userEmail);
+
+        //Assert
+
+        result.Should().BeOfType<ApiResponse<LoginInfos>>();
+    }
+
+    [Fact]
+    public async void LoginService_GetLoginInfosAsync_ReturnApiException()
+    {
+        // Arrange
+
+        // Act
+
+        Func<Task> result = async () => await _loginService.GetLoginsInfosAsync("email");
+
+        // Assert
+
+        await result.Should()
+            .ThrowAsync<ApiException>()
+            .WithMessage(Constants.USER_NOT_FOUND_MESSAGE);;
+    }
+
 
 
     private static User MockedUser()
