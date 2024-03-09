@@ -23,7 +23,6 @@ public class UserService(IUserRepository userRepository) : IUserServices
         var user = new User
         {
             Fullname = userBody.Fullname,
-            Email = userBody.Email,
             Cellphone = userBody.Cellphone,
             Document = userBody.Document,
             LoginInfos = loginInfoModel,
@@ -78,7 +77,6 @@ public class UserService(IUserRepository userRepository) : IUserServices
         user.Fullname = userDto.Fullname;
         user.Document = userDto.Document;
         user.Cellphone = userDto.Cellphone;
-        user.Email = userDto.Email;
 
         await _userRepository.UpdateUser(user);
 
@@ -91,6 +89,7 @@ public class UserService(IUserRepository userRepository) : IUserServices
     {
         return new LoginInfos
         {
+            Email = loginInfosDto.Email,
             Password = loginInfosDto.Password
         };
     }

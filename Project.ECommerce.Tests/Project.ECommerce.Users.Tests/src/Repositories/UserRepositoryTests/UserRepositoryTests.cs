@@ -60,8 +60,6 @@ public class UserRepositoryTests
 
         var user = MockedUser();
 
-        user.Email = "email@teste.com";
-
         var dbContext = await GetAppDbContextAsync();
         var userRepository = new UserRepository(dbContext);
 
@@ -220,7 +218,7 @@ public class UserRepositoryTests
 
     private static User MockedUser()
     {
-        var loginInfo = new LoginInfos { Password = "test1234" };
+        var loginInfo = new LoginInfos { Email = "Email", Password = "test1234" };
         var address = new List<Address>
         {
             new Address
@@ -238,7 +236,6 @@ public class UserRepositoryTests
         {
             Id = Guid.NewGuid(),
             Fullname = "Fullname",
-            Email = "Email",
             Cellphone = "Cellphone",
             Document = "Document",
             LoginInfos = loginInfo,

@@ -162,7 +162,7 @@ public class UserServiceTests
 
     private static UserPostDto MockedUserRequest()
     {
-        var loginInfo = new LoginInfosDto { Password = "test1234" };
+        var loginInfo = new LoginInfosDto { Email = "Email", Password = "test1234" };
         var address = new List<AddressDto>
         {
             new AddressDto
@@ -179,7 +179,6 @@ public class UserServiceTests
         return new UserPostDto
         {
             Fullname = "Fullname",
-            Email = "Email",
             Cellphone = "Cellphone",
             Document = "Document",
             LoginInfos = loginInfo,
@@ -189,7 +188,7 @@ public class UserServiceTests
 
     private static User MockedUserResponse()
     {
-        var loginInfo = new LoginInfos { Password = "test1234" };
+        var loginInfo = new LoginInfos { Email = "Email", Password = "test1234" };
         var address = new List<Address>
         {
             new Address
@@ -207,7 +206,6 @@ public class UserServiceTests
         {
             Id = Guid.NewGuid(),
             Fullname = "Fullname",
-            Email = "Email",
             Cellphone = "Cellphone",
             Document = "Document",
             LoginInfos = loginInfo,
@@ -220,7 +218,6 @@ public class UserServiceTests
         return new UserDto
         {
             Fullname = "Fullname",
-            Email = "Email",
             Cellphone = "Cellphone",
             Document = "Document"
         };
