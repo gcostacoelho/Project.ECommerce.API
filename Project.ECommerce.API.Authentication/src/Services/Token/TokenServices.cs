@@ -22,7 +22,7 @@ public class TokenServices(IAppSettings appSettings) : ITokenServices
         {
             Subject = GenerateClaims(identity, email),
             SigningCredentials = creds,
-            Expires = DateTime.UtcNow.AddDays(1),
+            Expires = DateTime.UtcNow.AddHours(8),
         };
 
         var token = handler.CreateToken(tokenDescriptor);
@@ -30,9 +30,34 @@ public class TokenServices(IAppSettings appSettings) : ITokenServices
         return handler.WriteToken(token);
     }
 
-    public bool ValidateTokenAsync(string token)
+    public bool? ValidateTokenAsync(string token)
     {
-        throw new NotImplementedException();
+        var handler = new JwtSecurityTokenHandler();
+
+        var secretEncoded = Encoding.UTF8.GetBytes(_appSettings.Secret);
+
+        try
+        {
+            handler.ValidateToken
+            (
+                token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(secretEncoded),
+                    ValidateLifetime = true,
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken
+            );
+
+            return true;
+        }
+        catch (System.Exception)
+        {
+
+            return null;
+        }
     }
 
     private static ClaimsIdentity GenerateClaims(string identity, string email)

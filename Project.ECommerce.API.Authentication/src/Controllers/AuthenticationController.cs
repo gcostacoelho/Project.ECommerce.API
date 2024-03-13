@@ -17,5 +17,13 @@ namespace Project.ECommerce.API.Authentication.src.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet("validateToken/{token}")]
+        public IActionResult ValidateTokenAsync(string token)
+        {
+            var response = _authenticationFacade.ValidateToken(token);
+
+            return Ok(response);
+        }
     }
 }

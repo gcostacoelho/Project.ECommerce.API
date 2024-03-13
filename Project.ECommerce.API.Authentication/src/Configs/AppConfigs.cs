@@ -1,8 +1,4 @@
-using System.Text;
-
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 using Project.ECommerce.API.Authentication.src.Database;
 using Project.ECommerce.API.Authentication.src.Facades;
@@ -38,24 +34,5 @@ public static class AppConfigs
 
         // Services
         services.AddScoped<ITokenServices, TokenServices>();
-    }
-
-    public static void RegisterAuthenticationScheme(this IServiceCollection services, IConfiguration configuration)
-    {
-        var key = Encoding.UTF8.GetBytes(configuration.GetSection("AppSettings:Secret").Value);
-
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer(op =>
-        {
-            op.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateIssuer = false,
-                ValidateLifetime = true,
-                ValidateAudience = false
-            };
-        });
-
     }
 }

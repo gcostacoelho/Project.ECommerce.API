@@ -3,5 +3,5 @@ public interface ITokenServices
 {
     string CreateTokenAsync(string identity, string email);
 
-    bool ValidateTokenAsync(string token);
+    bool? ValidateTokenAsync(string token);
 }

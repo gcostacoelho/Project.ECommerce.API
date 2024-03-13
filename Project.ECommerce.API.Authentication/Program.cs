@@ -14,7 +14,6 @@ config.SetBasePath(builder.Environment.ContentRootPath)
 
 builder.Services.RegisterServices();
 builder.Services.RegisterDatabaseConnection(config);
-builder.Services.RegisterAuthenticationScheme(config);
 
 builder.Services.AddControllers();
 
