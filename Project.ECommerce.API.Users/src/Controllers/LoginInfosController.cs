@@ -37,17 +37,4 @@ public class LoginInfosController(ILoginServices loginServices) : ControllerBase
 
         return Ok(response);
     }
-
-    [HttpGet]
-    [ProducesResponseType(typeof(ApiResponse<LoginInfos>), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status401Unauthorized)]
-    [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-
-    public async Task<IActionResult> GetLoginsInfosAsync([FromHeader, Required] string email)
-    {
-        var response = await _loginServices.GetLoginsInfosAsync(email);
-
-        return Ok(response);
-    }
 }
