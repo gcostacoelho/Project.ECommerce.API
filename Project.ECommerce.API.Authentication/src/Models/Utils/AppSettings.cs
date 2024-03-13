@@ -5,4 +5,5 @@ public class AppSettings(IConfiguration configuration) : IAppSettings
 {
     private readonly IConfiguration _config = configuration;
 
+    public string Secret => _config["AppSettings:Secret"];
 }

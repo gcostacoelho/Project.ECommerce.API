@@ -1,9 +1,12 @@
 using Microsoft.EntityFrameworkCore;
+using Project.ECommerce.API.Authentication.src.Models.Login;
 using Project.ECommerce.API.Authentication.src.Models.Utils;
 
 namespace Project.ECommerce.API.Authentication.src.Database;
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
+    public DbSet<LoginInfos> Logins { get; set; }
+
     public override int SaveChanges()
     {
         AddTimestamps();
