@@ -6,7 +6,6 @@ using Project.ECommerce.API.Authentication.src.Repositories.Interfaces;
 namespace Project.ECommerce.API.Authentication.src.Repositories;
 public class LoginRepository(AppDbContext appDbContext) : ILoginRepository
 {
-
     private readonly AppDbContext _appDbContext = appDbContext;
 
     public async Task<LoginInfos> GetLoginInfos(string email)
