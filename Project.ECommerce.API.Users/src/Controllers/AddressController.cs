@@ -13,6 +13,13 @@ public class AddressController(IAddressServices addressServices) : ControllerBas
 {
     private readonly IAddressServices _addressServices = addressServices;
 
+    /// <summary>
+    /// Update a user address in database 
+    /// </summary>
+    /// <param name="userId">Unique identifier from user</param>
+    /// <param name="addressId">Unique identifier from Address</param>
+    /// <param name="address">Body contain the infos to updated</param>
+
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
@@ -24,6 +31,12 @@ public class AddressController(IAddressServices addressServices) : ControllerBas
 
         return Ok(response);
     }
+
+    /// <summary>
+    /// Delete a Address in Database from user
+    /// </summary>
+    /// <param name="userId">Unique identifier from user</param>
+    /// <param name="addressId">Unique identifier from Address</param>
 
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -37,6 +50,11 @@ public class AddressController(IAddressServices addressServices) : ControllerBas
         return NoContent();
     }
 
+    /// <summary>
+    /// Add a new address infos
+    /// </summary>
+    /// <param name="userId">Unique identifier from user</param>
+    /// <param name="address">Body contain the infos</param>
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]

@@ -13,6 +13,11 @@ public class UserController(IUserServices userServices) : ControllerBase
 {
     private readonly IUserServices _userServices = userServices;
 
+
+    /// <summary>
+    /// Get a user data
+    /// </summary>
+    /// <param name="userId">Unique identifier from user</param>
     [HttpGet]
     [ProducesResponseType(typeof(ApiResponse<User>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
@@ -25,6 +30,9 @@ public class UserController(IUserServices userServices) : ControllerBase
         return Ok(response);
     }
 
+    /// <summary>
+    /// Get all users in database
+    /// </summary>
     [HttpGet("all")]
     [ProducesResponseType(typeof(ApiResponse<List<User>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
@@ -37,7 +45,10 @@ public class UserController(IUserServices userServices) : ControllerBase
         return Ok(response);
     }
 
-
+    /// <summary>
+    /// Create a new user in database
+    /// </summary>
+    /// <param name="user">user informations</param>
     [HttpPost]
     [ProducesResponseType(typeof(ApiResponse<User>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
@@ -50,6 +61,11 @@ public class UserController(IUserServices userServices) : ControllerBase
         return Ok(response);
     }
 
+    /// <summary>
+    /// Update a user data
+    /// </summary>
+    /// <param name="userId">Unique identifier</param>
+    /// <param name="user">User data to update</param>
     [HttpPut]
     [ProducesResponseType(typeof(ApiResponse<User>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
@@ -62,6 +78,11 @@ public class UserController(IUserServices userServices) : ControllerBase
         return Ok(response);
     }
 
+
+    /// <summary>
+    /// Delete a user with yours infos from database
+    /// </summary>
+    /// <param name="userId">Unique identifier</param>
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]

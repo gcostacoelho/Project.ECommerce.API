@@ -1,5 +1,5 @@
-using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using Project.ECommerce.API.Users.src.Models.Utils;
 using Project.ECommerce.API.Users.src.Services.Interfaces;
 
@@ -11,6 +11,12 @@ public class LoginInfosController(ILoginServices loginServices) : ControllerBase
 {
     private readonly ILoginServices _loginServices = loginServices;
 
+
+    /// <summary>
+    /// Update a user password
+    /// </summary>
+    /// <param name="email">User email</param>
+    /// <param name="newPass">New password</param>
     [HttpPatch("pass")]
     [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status401Unauthorized)]
@@ -24,6 +30,11 @@ public class LoginInfosController(ILoginServices loginServices) : ControllerBase
         return Ok(response);
     }
 
+    /// <summary>
+    /// Update a user email
+    /// </summary>
+    /// <param name="email">User email</param>
+    /// <param name="newEmail">New email</param>
     [HttpPatch("email")]
     [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status401Unauthorized)]
