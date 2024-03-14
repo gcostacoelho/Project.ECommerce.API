@@ -14,6 +14,7 @@ config.SetBasePath(builder.Environment.ContentRootPath)
 // Add services to the container.
 
 builder.Services.RegisterServices();
+builder.Services.RegisterSingletons(config);
 builder.Services.RegisterDatabaseConnection(config);
 
 builder.Services.AddControllers();
@@ -55,7 +56,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseMiddleware<ApiExceptionHandlerMiddleware>();
+app.UseMiddleware<ApiExceptionHandlerMiddleware>()
+    .UseMiddleware<AuthenticationMiddleware>();
 
 app.UseHttpsRedirection();
 

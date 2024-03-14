@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
-using Project.ECommerce.API.Users.src.Models.Login;
 using Project.ECommerce.API.Users.src.Models.Utils;
 using Project.ECommerce.API.Users.src.Services.Interfaces;
 
