@@ -40,6 +40,6 @@ public class AuthenticationFacade(ILoginRepository loginRepository, ITokenServic
             throw new ApiException(Constants.UNAUTHORIZED, HttpStatusCode.Unauthorized);
         }
 
-        return ApiResponse<string>.Success(Constants.TOKEN_VALID);
+        return ApiResponse<string>.Success(isValid);
     }
 }

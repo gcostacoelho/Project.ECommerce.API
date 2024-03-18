@@ -1,5 +1,4 @@
 using System.Reflection;
-using System.Text.Json.Serialization;
 using Microsoft.OpenApi.Models;
 using Project.ECommerce.API.Users.src.Configs;
 using Project.ECommerce.API.Users.src.Middlewares;
@@ -16,6 +15,8 @@ config.SetBasePath(builder.Environment.ContentRootPath)
 
 builder.Services.RegisterServices();
 builder.Services.RegisterSingletons(config);
+
+builder.Services.RegisterAuthenticationScheme();
 builder.Services.RegisterDatabaseConnection(config);
 
 builder.Services.AddControllers();
@@ -67,8 +68,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseMiddleware<ApiExceptionHandlerMiddleware>()
-    .UseMiddleware<AuthenticationMiddleware>();
+app.UseMiddleware<ApiExceptionHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 

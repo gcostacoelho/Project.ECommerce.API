@@ -1,5 +1,7 @@
-using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel.DataAnnotations;
+
 using Project.ECommerce.API.Users.src.Models.Users;
 using Project.ECommerce.API.Users.src.Models.Users.Dtos;
 using Project.ECommerce.API.Users.src.Models.Utils;
@@ -9,10 +11,10 @@ namespace Project.ECommerce.API.Users.src.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class UserController(IUserServices userServices) : ControllerBase
 {
     private readonly IUserServices _userServices = userServices;
-
 
     /// <summary>
     /// Get a user data
@@ -33,7 +35,7 @@ public class UserController(IUserServices userServices) : ControllerBase
     /// <summary>
     /// Get all users in database
     /// </summary>
-    [HttpGet("all")]
+    [HttpGet("all"), AllowAnonymous]
     [ProducesResponseType(typeof(ApiResponse<List<User>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status404NotFound)]
@@ -77,7 +79,6 @@ public class UserController(IUserServices userServices) : ControllerBase
 
         return Ok(response);
     }
-
 
     /// <summary>
     /// Delete a user with yours infos from database
