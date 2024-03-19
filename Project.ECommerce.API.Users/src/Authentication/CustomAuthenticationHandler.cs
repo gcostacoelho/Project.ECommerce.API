@@ -3,6 +3,7 @@ using System.Security.Principal;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Project.ECommerce.API.Users.src.Models;
 using Project.ECommerce.API.Users.src.Services.RestEaseServices;
 
@@ -18,6 +19,11 @@ public class CustomAuthenticationHandler(
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
         var token = Request.Headers.Authorization;
+
+        if (token.IsNullOrEmpty())
+        {
+            return AuthenticateResult.Fail(Constants.UNAUTHORIZED);
+        }
 
         var response = await _authRestEase.VerifyTokenValidAsync(token);
 

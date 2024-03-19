@@ -33,7 +33,7 @@ public class TokenServicesTests
     }
 
     [Fact]
-    public void TokenServices_ValidateTokenAsync_ReturnTrue()
+    public void TokenServices_ValidateTokenAsync_ReturnString()
     {
         // Arrange
         var token = JsonWebTokenForTests();
@@ -46,7 +46,7 @@ public class TokenServicesTests
 
         // Assert
 
-        result.Should().BeTrue();
+        result.Should().BeOfType<string>();
     }
 
     [Fact]

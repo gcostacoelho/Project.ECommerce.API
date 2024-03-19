@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Project.ECommerce.API.Users.src.Models.Adresses;
 using Project.ECommerce.API.Users.src.Models.Adresses.Dtos;
@@ -9,6 +10,7 @@ namespace Project.ECommerce.API.Users.src.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class AddressController(IAddressServices addressServices) : ControllerBase
 {
     private readonly IAddressServices _addressServices = addressServices;

@@ -35,7 +35,7 @@ public class UserController(IUserServices userServices) : ControllerBase
     /// <summary>
     /// Get all users in database
     /// </summary>
-    [HttpGet("all"), AllowAnonymous]
+    [HttpGet("all")]
     [ProducesResponseType(typeof(ApiResponse<List<User>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status404NotFound)]
@@ -51,7 +51,7 @@ public class UserController(IUserServices userServices) : ControllerBase
     /// Create a new user in database
     /// </summary>
     /// <param name="user">user informations</param>
-    [HttpPost]
+    [HttpPost, AllowAnonymous]
     [ProducesResponseType(typeof(ApiResponse<User>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status404NotFound)]

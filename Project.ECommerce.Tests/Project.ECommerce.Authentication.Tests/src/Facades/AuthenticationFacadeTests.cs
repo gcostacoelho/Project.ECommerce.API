@@ -70,14 +70,14 @@ public class AuthenticationFacadeTests
     public void AuthenticationFacade_ValidateToken_ReturnApiResponseString()
     {
         // Arrange
-        tokenServicesMocked.Setup(x => x.ValidateTokenAsync("Token")).Returns(true);
+        tokenServicesMocked.Setup(x => x.ValidateTokenAsync("Token")).Returns(Guid.NewGuid().ToString());
 
         // Act
         var result = _authenticationFacade.ValidateToken("Token");
 
         // Assert
         result.Should().BeOfType<ApiResponse<string>>();
-        result.Data.Should().Be(Constants.TOKEN_VALID);
+        result.Data.Should().BeOfType<string>();
     }
 
     [Fact]

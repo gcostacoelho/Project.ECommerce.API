@@ -2,11 +2,13 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using Project.ECommerce.API.Users.src.Models.Utils;
 using Project.ECommerce.API.Users.src.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Project.ECommerce.API.Users.src.Controllers;
 
 [ApiController]
 [Route("api/login/[controller]")]
+[Authorize]
 public class LoginInfosController(ILoginServices loginServices) : ControllerBase
 {
     private readonly ILoginServices _loginServices = loginServices;
