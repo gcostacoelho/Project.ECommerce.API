@@ -48,10 +48,17 @@ public class UserRepository(AppDbContext appDbContext) : IUserRepository
 
     public async Task<User> GetUser(string userId)
     {
-        return await _appDbContext.Users
-            .Include(u => u.Address)
-            .Include(u => u.LoginInfos)
-            .FirstOrDefaultAsync(u => u.Id == Guid.Parse(userId));
+        try
+        {
+            return await _appDbContext.Users
+                .Include(u => u.Address)
+                .Include(u => u.LoginInfos)
+                .FirstOrDefaultAsync(u => u.Id == Guid.Parse(userId));
+        }
+        catch (Exception)
+        {
+            return null;
+        }
     }
 
     public async Task<bool> UpdateUser(User userEntity)

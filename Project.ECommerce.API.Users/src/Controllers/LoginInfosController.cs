@@ -1,17 +1,24 @@
-using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
-using Project.ECommerce.API.Users.src.Models.Login;
+using System.ComponentModel.DataAnnotations;
 using Project.ECommerce.API.Users.src.Models.Utils;
 using Project.ECommerce.API.Users.src.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Project.ECommerce.API.Users.src.Controllers;
 
 [ApiController]
 [Route("api/login/[controller]")]
+[Authorize]
 public class LoginInfosController(ILoginServices loginServices) : ControllerBase
 {
     private readonly ILoginServices _loginServices = loginServices;
 
+
+    /// <summary>
+    /// Update a user password
+    /// </summary>
+    /// <param name="email">User email</param>
+    /// <param name="newPass">New password</param>
     [HttpPatch("pass")]
     [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status401Unauthorized)]
@@ -25,6 +32,11 @@ public class LoginInfosController(ILoginServices loginServices) : ControllerBase
         return Ok(response);
     }
 
+    /// <summary>
+    /// Update a user email
+    /// </summary>
+    /// <param name="email">User email</param>
+    /// <param name="newEmail">New email</param>
     [HttpPatch("email")]
     [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status401Unauthorized)]
@@ -34,19 +46,6 @@ public class LoginInfosController(ILoginServices loginServices) : ControllerBase
     public async Task<IActionResult> UpdateEmailAsync([FromHeader, Required] string email, string newEmail)
     {
         var response = await _loginServices.UpdateEmailAsync(email, newEmail);
-
-        return Ok(response);
-    }
-
-    [HttpGet]
-    [ProducesResponseType(typeof(ApiResponse<LoginInfos>), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status401Unauthorized)]
-    [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-
-    public async Task<IActionResult> GetLoginsInfosAsync([FromHeader, Required] string email)
-    {
-        var response = await _loginServices.GetLoginsInfosAsync(email);
 
         return Ok(response);
     }

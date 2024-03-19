@@ -1,4 +1,4 @@
-using System.Text.Json.Serialization;
+using System.Reflection;
 using Microsoft.OpenApi.Models;
 using Project.ECommerce.API.Users.src.Configs;
 using Project.ECommerce.API.Users.src.Middlewares;
@@ -14,6 +14,9 @@ config.SetBasePath(builder.Environment.ContentRootPath)
 // Add services to the container.
 
 builder.Services.RegisterServices();
+builder.Services.RegisterSingletons(config);
+
+builder.Services.RegisterAuthenticationScheme();
 builder.Services.RegisterDatabaseConnection(config);
 
 builder.Services.AddControllers();
@@ -44,6 +47,16 @@ builder.Services.AddSwaggerGen(c =>
             new string[] {}
         }
     });
+
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "User API Service",
+        Description = "An ASP.NET Core Web API for create and manage the users registers",
+    });
+
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
 var app = builder.Build();

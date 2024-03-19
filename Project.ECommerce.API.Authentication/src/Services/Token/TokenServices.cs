@@ -30,7 +30,7 @@ public class TokenServices(IAppSettings appSettings) : ITokenServices
         return handler.WriteToken(token);
     }
 
-    public bool? ValidateTokenAsync(string token)
+    public string ValidateTokenAsync(string token)
     {
         var handler = new JwtSecurityTokenHandler();
 
@@ -51,11 +51,12 @@ public class TokenServices(IAppSettings appSettings) : ITokenServices
                 }, out SecurityToken validatedToken
             );
 
-            return true;
-        }
-        catch (System.Exception)
-        {
+            var jwtToken = (JwtSecurityToken)validatedToken;
 
+            return jwtToken.Claims.First(x => x.Type == "id").Value;
+        }
+        catch (Exception)
+        {
             return null;
         }
     }
